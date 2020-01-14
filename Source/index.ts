@@ -1,9 +1,22 @@
 import Express = require ("express");
+import openurl = require ("openurl");
+import Path = require ("path");
+
+import Config from "./config";
+
+const Version = "0.0.0";
 
 const App = Express ();
+const WWWRootPath = Path.join (process.cwd (), Config.WebsiteRoot);
 
-App.use (Express.static (process.cwd ()));
+console.log (`EZ6U v${ Version }`);
 
-console.log (`Static path: ${ process.cwd () }`);
-console.log ("Listening on localhost:8686");
-App.listen (8686);
+console.log (`Static path: ${ WWWRootPath }`);
+App.use (Express.static (WWWRootPath));
+
+if (Config.OpenInBrowser) {
+    openurl.open (`http://localhost:${ Config.Port }`);
+}
+
+console.log (`Listening on localhost:${ Config.Port }`);
+App.listen (Config.Port);
