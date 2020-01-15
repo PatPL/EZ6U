@@ -3,16 +3,19 @@ import openurl = require ("openurl");
 import Path = require ("path");
 
 import Config from "./config";
-
-const Version = "0.0.0";
+import Global from "./global";
+import FileExplorer from "./fileExplorer";
 
 const App = Express ();
-const WWWRootPath = Path.join (process.cwd (), Config.WebsiteRoot);
 
-console.log (`EZ6U v${ Version }`);
+console.log (`EZ6U v${ Global.Version }`);
 
-console.log (`Static path: ${ WWWRootPath }`);
-App.use (Express.static (WWWRootPath));
+if (Config.FileExplorer_Enable) {
+    FileExplorer (App);
+}
+
+console.log (`Static path: ${ Global.WWWRootPath }`);
+App.use (Express.static (Global.WWWRootPath));
 
 if (Config.OpenInBrowser) {
     openurl.open (`http://localhost:${ Config.Port }`);
