@@ -1,0 +1,6 @@
+Project file was made with Gravit Designer
+.ico file was made with https://www.icoconverter.com/
+
+To apply the icon to the build exe, you need to replace the icon
+of cached node exe in pkg cache in C:/Users/<you>/.pkg-cache/<wherever it is>
+Use Resource Hacker to chenge the node's icon
